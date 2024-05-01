@@ -35,28 +35,28 @@ pub trait Plug {
         members_multi.into()
     }
 
-    #[endpoint(increaseExperience)]
-    fn add_member_endpoint(&self, address: ManagedAddress, weight: BigUint) {
+    #[endpoint(addXp)]
+    fn add_xp_endpoint(&self, address: ManagedAddress, amount: BigUint) {
         self.require_caller_is_manager();
 
         let current_weight = self.members().get(&address).unwrap_or_default();
-        let new_weight = current_weight + weight;
+        let new_weight = current_weight + amount;
 
         self.members().insert(address, new_weight);
     }
 
-    #[endpoint(decreaseExperience)]
-    fn remove_member_endpoint(&self, address: ManagedAddress, weight: BigUint) {
+    #[endpoint(removeXp)]
+    fn remove_xp_endpoint(&self, address: ManagedAddress, amount: BigUint) {
         self.require_caller_is_manager();
 
         let current_weight = self.members().get(&address).unwrap_or_default();
-        let new_weight = if current_weight > weight {
-            current_weight - weight
-        } else {
-            BigUint::zero()
-        };
 
-        self.members().insert(address, new_weight);
+        if amount > current_weight {
+            self.members().remove(&address);
+            return;
+        }
+
+        self.members().insert(address, current_weight - amount);
     }
 
     fn require_caller_is_manager(&self) {
