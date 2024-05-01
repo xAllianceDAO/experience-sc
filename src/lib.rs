@@ -10,12 +10,7 @@ pub trait Plug {
     }
 
     #[upgrade]
-    fn upgrade(&self) {
-        self.manager().clear(); // TODO: remove after next upgrade
-
-        let owner = self.blockchain().get_owner_address();
-        self.managers().insert(owner);
-    }
+    fn upgrade(&self) {}
 
     #[view(getDaoVoteWeight)]
     fn get_dao_vote_weight_view(
@@ -69,10 +64,6 @@ pub trait Plug {
 
         require!(self.managers().contains(&caller), "caller must be manager");
     }
-
-    // TODO: deprecate after next upgrade (storage clearing)
-    #[storage_mapper("manager")]
-    fn manager(&self) -> SingleValueMapper<ManagedAddress>;
 
     #[view(getManagers)]
     #[storage_mapper("managers")]
