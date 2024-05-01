@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            5
+// Endpoints:                            6
 // Async Callback (empty):               1
-// Total number of exported functions:   7
+// Total number of exported functions:   8
 
 #![no_std]
 #![allow(internal_features)]
@@ -25,6 +25,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         getDaoMembers => get_dao_members_view
         increaseExperience => add_member_endpoint
         decreaseExperience => remove_member_endpoint
+        getManagers => managers
     )
 }
 

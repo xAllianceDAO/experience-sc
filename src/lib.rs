@@ -6,11 +6,16 @@ multiversx_sc::imports!();
 pub trait Plug {
     #[init]
     fn init(&self, manager: ManagedAddress) {
-        self.manager().set(manager);
+        self.managers().insert(manager);
     }
 
     #[upgrade]
-    fn upgrade(&self) {}
+    fn upgrade(&self) {
+        self.manager().clear(); // TODO: remove after next upgrade
+
+        let owner = self.blockchain().get_owner_address();
+        self.managers().insert(owner);
+    }
 
     #[view(getDaoVoteWeight)]
     fn get_dao_vote_weight_view(
@@ -61,13 +66,17 @@ pub trait Plug {
 
     fn require_caller_is_manager(&self) {
         let caller = self.blockchain().get_caller();
-        let manager = self.manager().get();
 
-        require!(caller == manager, "caller must be manager");
+        require!(self.managers().contains(&caller), "caller must be manager");
     }
 
+    // TODO: deprecate after next upgrade (storage clearing)
     #[storage_mapper("manager")]
     fn manager(&self) -> SingleValueMapper<ManagedAddress>;
+
+    #[view(getManagers)]
+    #[storage_mapper("managers")]
+    fn managers(&self) -> UnorderedSetMapper<ManagedAddress>;
 
     #[storage_mapper("members")]
     fn members(&self) -> MapMapper<ManagedAddress, BigUint>;
