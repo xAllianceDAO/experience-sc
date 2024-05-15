@@ -5,8 +5,9 @@ multiversx_sc::imports!();
 #[multiversx_sc::contract]
 pub trait ExperienceContract {
     #[init]
-    fn init(&self, manager: ManagedAddress) {
-        self.managers().insert(manager);
+    fn init(&self) {
+        let owner = self.blockchain().get_caller();
+        self.managers().insert(owner);
     }
 
     #[upgrade]
