@@ -3,7 +3,7 @@
 multiversx_sc::imports!();
 
 #[multiversx_sc::contract]
-pub trait Plug {
+pub trait ExperienceContract {
     #[init]
     fn init(&self, manager: ManagedAddress) {
         self.managers().insert(manager);

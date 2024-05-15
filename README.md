@@ -1,4 +1,4 @@
-# Alliance Plug Smart Contract
+# Alliance Experience Smart Contract
 
 [![Spawnable Contract Badge for Mainnet](https://api.spawnable.io/badges/contracts/dao-plug?network=mainnet)](https://spawnable.io/contracts/dao-plug)
 

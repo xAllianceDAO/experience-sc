@@ -1,5 +1,5 @@
 [package]
-name = "plug"
+name = "experience"
 version = "0.0.1"
 authors = ["Micha Vie <micha@peerme.io>", "PeerMe <hello@peerme.io>"]
 edition = "2018"

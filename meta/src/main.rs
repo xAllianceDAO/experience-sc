@@ -1,3 +1,3 @@
 fn main() {
-    multiversx_sc_meta::cli_main::<plug::AbiProvider>();
+    multiversx_sc_meta::cli_main::<experience::AbiProvider>();
 }

@@ -5,7 +5,7 @@
 # ##########################################
 
 [package]
-name = "plug-wasm"
+name = "experience-wasm"
 version = "0.0.0"
 edition = "2018"
 publish = false
@@ -21,7 +21,7 @@ debug = false
 panic = "abort"
 overflow-checks = false
 
-[dependencies.plug]
+[dependencies.experience]
 path = ".."
 
 [dependencies.multiversx-sc-wasm-adapter]

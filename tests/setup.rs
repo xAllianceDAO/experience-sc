@@ -1,4 +1,4 @@
-use Plug::*;
+use experience::*;
 use multiversx_sc::types::Address;
 use multiversx_sc_scenario::{rust_biguint, testing_framework::*, DebugApi};
 
@@ -6,18 +6,18 @@ const WASM_PATH: &str = "output/lib.wasm";
 
 struct ContractSetup<ContractObjBuilder>
 where
-    ContractObjBuilder: 'static + Copy + Fn() -> Plug::ContractObj<DebugApi>,
+    ContractObjBuilder: 'static + Copy + Fn() -> experience::ContractObj<DebugApi>,
 {
     pub blockchain_wrapper: BlockchainStateWrapper,
     pub owner_address: Address,
-    pub contract_wrapper: ContractObjWrapper<Plug::ContractObj<DebugApi>, ContractObjBuilder>,
+    pub contract_wrapper: ContractObjWrapper<experience::ContractObj<DebugApi>, ContractObjBuilder>,
 }
 
 fn setup_contract<ContractObjBuilder>(
     cf_builder: ContractObjBuilder,
 ) -> ContractSetup<ContractObjBuilder>
 where
-    ContractObjBuilder: 'static + Copy + Fn() -> Plug::ContractObj<DebugApi>,
+    ContractObjBuilder: 'static + Copy + Fn() -> experience::ContractObj<DebugApi>,
 {
     let rust_zero = rust_biguint!(0u64);
     let mut blockchain_wrapper = BlockchainStateWrapper::new();
@@ -44,7 +44,7 @@ where
 
 #[test]
 fn deploy_test() {
-    let mut setup = setup_contract(Plug::contract_obj);
+    let mut setup = setup_contract(experience::contract_obj);
 
     // simulate deploy
     setup

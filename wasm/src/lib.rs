@@ -17,14 +17,14 @@ multiversx_sc_wasm_adapter::allocator!();
 multiversx_sc_wasm_adapter::panic_handler!();
 
 multiversx_sc_wasm_adapter::endpoints! {
-    plug
+    experience
     (
         init => init
         upgrade => upgrade
         getDaoVoteWeight => get_dao_vote_weight_view
         getDaoMembers => get_dao_members_view
-        increaseExperience => add_member_endpoint
-        decreaseExperience => remove_member_endpoint
+        addXp => add_xp_endpoint
+        removeXp => remove_xp_endpoint
         getManagers => managers
     )
 }
