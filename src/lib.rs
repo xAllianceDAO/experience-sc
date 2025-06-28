@@ -29,35 +29,35 @@ pub trait ExperienceContract {
     ) -> MultiValueEncoded<MultiValue2<ManagedAddress, BigUint>> {
         let mut members_multi = MultiValueEncoded::new();
 
-        for (address, weight) in self.members().iter() {
-            members_multi.push((address, weight).into());
+        for (address, points) in self.members().iter() {
+            members_multi.push((address, points).into());
         }
 
         members_multi.into()
     }
 
-    #[endpoint(addXp)]
-    fn add_xp_endpoint(&self, address: ManagedAddress, amount: BigUint) {
+    #[endpoint(addPoints)]
+    fn add_points_endpoint(&self, address: ManagedAddress, amount: BigUint) {
         self.require_caller_is_manager();
 
-        let current_weight = self.members().get(&address).unwrap_or_default();
-        let new_weight = current_weight + amount;
+        let current_points = self.members().get(&address).unwrap_or_default();
+        let new_points = current_points + amount;
 
-        self.members().insert(address, new_weight);
+        self.members().insert(address, new_points);
     }
 
-    #[endpoint(removeXp)]
-    fn remove_xp_endpoint(&self, address: ManagedAddress, amount: BigUint) {
+    #[endpoint(removePoints)]
+    fn remove_points_endpoint(&self, address: ManagedAddress, amount: BigUint) {
         self.require_caller_is_manager();
 
-        let current_weight = self.members().get(&address).unwrap_or_default();
+        let current_points = self.members().get(&address).unwrap_or_default();
 
-        if amount > current_weight {
+        if amount > current_points {
             self.members().remove(&address);
             return;
         }
 
-        self.members().insert(address, current_weight - amount);
+        self.members().insert(address, current_points - amount);
     }
 
     fn require_caller_is_manager(&self) {
