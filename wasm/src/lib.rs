@@ -6,9 +6,9 @@
 
 // Init:                                 1
 // Upgrade:                              1
-// Endpoints:                            5
+// Endpoints:                            9
 // Async Callback (empty):               1
-// Total number of exported functions:   8
+// Total number of exported functions:  12
 
 #![no_std]
 
@@ -22,8 +22,12 @@ multiversx_sc_wasm_adapter::endpoints! {
         upgrade => upgrade
         getDaoVoteWeight => get_dao_vote_weight_view
         getDaoMembers => get_dao_members_view
-        addXp => add_xp_endpoint
-        removeXp => remove_xp_endpoint
+        addPoints => add_points_endpoint
+        removePoints => remove_points_endpoint
+        addTier => add_tier_endpoint
+        clearAllTiers => clear_all_tiers_endpoint
+        getMemberTier => get_member_tier_view
+        getAllTiers => get_all_tiers_view
         getManagers => managers
     )
 }
