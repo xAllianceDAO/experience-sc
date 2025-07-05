@@ -22,6 +22,18 @@ pub trait ExperienceContract {
     #[upgrade]
     fn upgrade(&self) {}
 
+    #[only_owner]
+    #[endpoint(addManager)]
+    fn add_manager_endpoint(&self, address: ManagedAddress) {
+        self.managers().insert(address);
+    }
+
+    #[only_owner]
+    #[endpoint(removeManager)]
+    fn remove_manager_endpoint(&self, address: ManagedAddress) {
+        self.managers().swap_remove(&address);
+    }
+
     #[view(getDaoVoteWeight)]
     fn get_dao_vote_weight_view(
         &self,
