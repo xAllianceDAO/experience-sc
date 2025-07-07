@@ -96,6 +96,11 @@ pub trait ExperienceContract {
         self.tiers().clear();
     }
 
+    #[view(getMemberPoints)]
+    fn get_member_points_view(&self, address: ManagedAddress) -> BigUint {
+        self.members().get(&address).unwrap_or_default()
+    }
+
     #[view(getMemberTier)]
     fn get_member_tier_view(
         &self,

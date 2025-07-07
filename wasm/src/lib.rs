@@ -6,9 +6,9 @@
 
 // Init:                                 1
 // Upgrade:                              1
-// Endpoints:                           11
+// Endpoints:                           12
 // Async Callback (empty):               1
-// Total number of exported functions:  14
+// Total number of exported functions:  15
 
 #![no_std]
 
@@ -28,6 +28,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         removePoints => remove_points_endpoint
         addTier => add_tier_endpoint
         clearAllTiers => clear_all_tiers_endpoint
+        getMemberPoints => get_member_points_view
         getMemberTier => get_member_tier_view
         getAllTiers => get_all_tiers_view
         getManagers => managers
