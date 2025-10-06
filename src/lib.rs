@@ -23,6 +23,12 @@ pub trait ExperienceContract {
     fn upgrade(&self) {}
 
     #[only_owner]
+    #[endpoint(forceClearAllMemberPoints)]
+    fn force_clear_all_member_points_endpoint(&self) {
+        self.members().clear();
+    }
+
+    #[only_owner]
     #[endpoint(addManager)]
     fn add_manager_endpoint(&self, address: ManagedAddress) {
         self.managers().insert(address);
